@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { ButtonToolbar, DropdownButton, MenuItem } from "react-bootstrap";
+
+import DropDown from "../Dropdown/Dropdown";
 
 export class Card extends Component {
+  handleRefresh = () => {
+    alert("refresh");
+  };
   render() {
     return (
       <div className={"card" + (this.props.plain ? " card-plain" : "")}>
@@ -9,18 +13,11 @@ export class Card extends Component {
           <h4 className="title state d-flex justify-content-between">
             {this.props.title}
             <div className="d-flex">
-              <ButtonToolbar>
-                <DropdownButton title="갱신주기 설정" id="dropdown-size-medium">
-                  <MenuItem eventKey="1">10 minutes</MenuItem>
-                  <MenuItem eventKey="2">30 minutes</MenuItem>
-                  <MenuItem eventKey="3">1 hours</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4">set initial</MenuItem>
-                </DropdownButton>
-              </ButtonToolbar>{" "}
+              <DropDown />
               <i
                 className={this.props.statsIcon}
                 style={{ cursor: "pointer" }}
+                onClick={this.handleRefresh}
               />
             </div>
           </h4>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
 
-import { Card } from "../../components/Card/Card";
+import { Card } from "../../components/Chart/Card/Card";
 import {
   dataPie,
   legendPie,
@@ -12,7 +12,7 @@ import {
   legendSales
   // dataBar,
   // optionsBar,
-  // responsiveBar
+  // responsiveBar,
   // legendBar
 } from "../../variables/Variables";
 
