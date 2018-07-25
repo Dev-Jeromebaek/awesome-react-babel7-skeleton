@@ -1,36 +1,100 @@
-import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
-import { Grid, Row, Col } from "react-bootstrap";
+import React, { Component } from 'react';
+import ChartistGraph from 'react-chartist';
+import { Container, Row, Col } from 'reactstrap';
 
-import { Card } from "../../components/Chart/Card/Card";
+import { Card } from '../../components/Chart/Card/Card';
+
 import {
   dataPie,
   legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales
-  // dataBar,
-  // optionsBar,
-  // responsiveBar,
-  // legendBar
-} from "../../variables/Variables";
+  // optionSimplePie,
+  optionDonutPie,
+  // listenerSimplePie,
+  listenerPie
+} from '../../variables/Pie';
+
+import {
+  dataLine,
+  optionsLine,
+  optionsArea,
+  responsiveLine,
+  legendLine,
+  listenerLine
+} from '../../variables/Line';
+import {
+  dataBar,
+  optionsBar,
+  responsiveBar,
+  legendBar,
+  listenerBar
+} from '../../variables/Bar';
 
 class Dashboard extends Component {
-  createLegend(json) {
-    var legend = [];
-    for (var i = 0; i < json["names"].length; i++) {
-      var type = "fa fa-circle text-" + json["types"][i];
+  createLegend = json => {
+    let legend = [];
+
+    for (let i = 0; i < json['names'].length; i++) {
+      let type = 'fa fa-circle text-' + json['types'][i];
       legend.push(<i className={type} key={i} />);
-      legend.push(" ");
-      legend.push(json["names"][i]);
+      legend.push(' ');
+      legend.push(json['names'][i]);
     }
     return legend;
-  }
+  };
   render() {
     return (
       <div className="content">
-        <Grid fluid>
+        <Container fluid>
+          <Row>
+            <Col md={4}>
+              <Card
+                statsIcon="fa fa-history"
+                title="차트 이름"
+                category="상세 설명"
+                stats="Updated 10 minutes ago"
+                content={
+                  <div
+                    id="chartPreferences"
+                    className="ct-chart ct-perfect-fourth"
+                  >
+                    <ChartistGraph
+                      data={dataPie}
+                      type="Pie"
+                      options={optionDonutPie}
+                      listener={listenerPie}
+                    />
+                  </div>
+                }
+                legend={
+                  <div className="legend">{this.createLegend(legendPie)}</div>
+                }
+              />
+            </Col>
+            <Col md={8}>
+              <Card
+                statsIcon="fa fa-history"
+                id="chartHours"
+                title="차트 이름"
+                category="상세 설명"
+                stats="Updated 3 minutes ago"
+                content={
+                  <div className="ct-chart">
+                    <ChartistGraph
+                      data={dataLine}
+                      type="Bar"
+                      options={optionsLine}
+                      responsiveOptions={responsiveLine}
+                      listener={listenerBar}
+                    />
+                  </div>
+                }
+                legend={
+                  <div className="legend">{this.createLegend(legendLine)}</div>
+                }
+              />
+            </Col>
+          </Row>
+
           <Row>
             <Col md={8}>
               <Card
@@ -42,87 +106,94 @@ class Dashboard extends Component {
                 content={
                   <div className="ct-chart">
                     <ChartistGraph
-                      data={dataSales}
-                      type="Bar"
-                      // type="Line"
-                      options={optionsSales}
-                      responsiveOptions={responsiveSales}
+                      data={dataLine}
+                      type="Line"
+                      options={optionsLine}
+                      responsiveOptions={responsiveLine}
+                      listener={listenerLine}
                     />
                   </div>
                 }
                 legend={
-                  <div className="legend">{this.createLegend(legendSales)}</div>
+                  <div className="legend">{this.createLegend(legendLine)}</div>
                 }
               />
             </Col>
             <Col md={4}>
               <Card
                 statsIcon="fa fa-history"
+                id="chartHours"
                 title="차트 이름"
                 category="상세 설명"
-                stats="Campaign sent 2 days ago"
+                stats="Updated 3 minutes ago"
+                content={
+                  <div className="ct-chart">
+                    <ChartistGraph
+                      data={dataLine}
+                      type="Line"
+                      options={optionsArea}
+                      responsiveOptions={responsiveLine}
+                      listener={listenerLine}
+                    />
+                  </div>
+                }
+                legend={
+                  <div className="legend">{this.createLegend(legendLine)}</div>
+                }
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4}>
+              <Card
+                statsIcon="fa fa-history"
+                id="chartHours"
+                title="차트 이름"
+                category="상세 설명"
+                stats="Updated 3 minutes ago"
+                content={
+                  <div className="ct-chart">
+                    <ChartistGraph
+                      data={dataBar}
+                      type="Bar"
+                      options={optionsBar}
+                      responsiveOptions={responsiveBar}
+                      listener={listenerBar}
+                    />
+                  </div>
+                }
+                legend={
+                  <div className="legend">{this.createLegend(legendBar)}</div>
+                }
+              />
+            </Col>
+            {/* <Col md={8}>
+              <Card
+                statsIcon="fa fa-history"
+                title="차트 이름"
+                category="상세 설명"
+                stats="Updated 10 minutes ago"
                 content={
                   <div
                     id="chartPreferences"
                     className="ct-chart ct-perfect-fourth"
                   >
-                    <ChartistGraph data={dataPie} type="Pie" />
+                    <ChartistGraph
+                      data={dataPie}
+                      type="Pie"
+                      options={optionSimplePie}
+                      responsiveOptions={responsiveOptionsSimplePie}
+                      listener={listenerPie}
+                    />
                   </div>
                 }
                 legend={
                   <div className="legend">{this.createLegend(legendPie)}</div>
                 }
               />
-            </Col>
+            </Col> */}
           </Row>
-
-          {/* <Row>
-            <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                // legend={
-                //   <div className="legend">{this.createLegend(legendBar)}</div>
-                // }
-              />
-            </Col>
-            <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                // legend={
-                //   <div className="legend">{this.createLegend(legendBar)}</div>
-                // }
-              />
-            </Col>
-          </Row> */}
-        </Grid>
+        </Container>
       </div>
     );
   }
