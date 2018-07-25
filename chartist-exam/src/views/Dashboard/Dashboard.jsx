@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 import { Grid, Row, Col } from "react-bootstrap";
 
-import { Card } from "components/Card/Card.jsx";
+import { Card } from "../../components/Card/Card";
 import {
   dataPie,
   legendPie,
@@ -14,7 +14,7 @@ import {
   // optionsBar,
   // responsiveBar
   // legendBar
-} from "variables/Variables.jsx";
+} from "../../variables/Variables";
 
 class Dashboard extends Component {
   createLegend(json) {

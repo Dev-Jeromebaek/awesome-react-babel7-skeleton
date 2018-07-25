@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import dashboardRoutes from "routes/dashboard.jsx";
+import dashboardRoutes from "../../routes/dashboard";
 
 class Dashboard extends Component {
   render() {
@@ -9,14 +9,6 @@ class Dashboard extends Component {
       <div id="main-panel" className="main-panel" ref="mainPanel">
         <Switch>
           {dashboardRoutes.map((prop, key) => {
-            if (prop.name === "Notifications")
-              return (
-                <Route
-                  path={prop.path}
-                  key={key}
-                  render={routeProps => <prop.component {...routeProps} />}
-                />
-              );
             if (prop.redirect)
               return <Redirect from={prop.path} to={prop.to} key={key} />;
             return (
