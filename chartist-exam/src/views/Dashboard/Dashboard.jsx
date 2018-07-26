@@ -2,31 +2,32 @@ import React, { Component } from 'react';
 import ChartistGraph from 'react-chartist';
 import { Container, Row, Col } from 'reactstrap';
 
-import { Card } from '../../components/Chart/Card/Card';
+import { Card } from '../../components/chart/card/Card';
 
 import {
   dataPie,
   legendPie,
-  // optionSimplePie,
+  optionSimplePie,
   optionDonutPie,
-  // listenerSimplePie,
-  listenerPie
+  drawListenerPie
+  // createListenerPie,
 } from '../../variables/Pie';
-
 import {
   dataLine,
   optionsLine,
   optionsArea,
   responsiveLine,
   legendLine,
-  listenerLine
+  drawListenerLine
+  // createListenerLine,
 } from '../../variables/Line';
 import {
   dataBar,
   optionsBar,
   responsiveBar,
   legendBar,
-  listenerBar
+  drawListenerBar
+  // createListenerBar,
 } from '../../variables/Bar';
 
 class Dashboard extends Component {
@@ -61,7 +62,7 @@ class Dashboard extends Component {
                       data={dataPie}
                       type="Pie"
                       options={optionDonutPie}
-                      listener={listenerPie}
+                      listener={drawListenerPie}
                     />
                   </div>
                 }
@@ -84,7 +85,7 @@ class Dashboard extends Component {
                       type="Bar"
                       options={optionsLine}
                       responsiveOptions={responsiveLine}
-                      listener={listenerBar}
+                      listener={drawListenerBar}
                     />
                   </div>
                 }
@@ -110,7 +111,7 @@ class Dashboard extends Component {
                       type="Line"
                       options={optionsLine}
                       responsiveOptions={responsiveLine}
-                      listener={listenerLine}
+                      listener={drawListenerLine}
                     />
                   </div>
                 }
@@ -133,7 +134,7 @@ class Dashboard extends Component {
                       type="Line"
                       options={optionsArea}
                       responsiveOptions={responsiveLine}
-                      listener={listenerLine}
+                      listener={drawListenerLine}
                     />
                   </div>
                 }
@@ -158,7 +159,7 @@ class Dashboard extends Component {
                       type="Bar"
                       options={optionsBar}
                       responsiveOptions={responsiveBar}
-                      listener={listenerBar}
+                      listener={drawListenerBar}
                     />
                   </div>
                 }
@@ -183,7 +184,7 @@ class Dashboard extends Component {
                       type="Pie"
                       options={optionSimplePie}
                       responsiveOptions={responsiveOptionsSimplePie}
-                      listener={listenerPie}
+                      listener={drawListenerPie}
                     />
                   </div>
                 }

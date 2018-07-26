@@ -40,12 +40,27 @@ const responsiveBar = [
   ]
 ];
 const legendBar = {
-  names: ['Tesla Model S', 'BMW 5 Series'],
+  names: ['A', 'B'],
   types: ['info', 'danger']
 };
 
-const listenerBar = {
+const drawListenerBar = {
   draw: function(data) {
+    if (data.type === 'bar') {
+      data.element.animate({
+        y2: {
+          begin: 0,
+          dur: 500,
+          from: data.y1,
+          to: data.y2
+        }
+      });
+    }
+  }
+};
+
+const createListenerBar = {
+  create: function(data) {
     if (data.type === 'bar') {
       data.element.animate({
         y2: {
@@ -64,5 +79,6 @@ module.exports = {
   optionsBar,
   responsiveBar,
   legendBar,
-  listenerBar
+  drawListenerBar,
+  createListenerBar
 };

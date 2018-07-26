@@ -61,11 +61,32 @@ const responsiveLine = [
   ]
 ];
 const legendLine = {
-  names: ['1파랑', '1빨강', '1노랑'],
+  names: ['가', '나', '다'],
   types: ['info', 'danger', 'warning']
 };
 
-const listenerLine = {
+const createListenerLine = {
+  // draw: function(data) {
+  create: function(data) {
+    if (data.type === 'line' || data.type === 'area') {
+      data.element.animate({
+        d: {
+          begin: 2000 * data.index,
+          dur: 2000,
+          from: data.path
+            .clone()
+            .scale(1, 0)
+            .translate(0, data.chartRect.height())
+            .stringify(),
+          to: data.path.clone().stringify()
+          // easing: Chartist.Svg.Easing.easeOutQuint
+        }
+      });
+    }
+  }
+};
+
+const drawListenerLine = {
   draw: function(data) {
     if (data.type === 'line' || data.type === 'area') {
       data.element.animate({
@@ -91,5 +112,6 @@ module.exports = {
   optionsArea,
   responsiveLine,
   legendLine,
-  listenerLine // Bar draw animation
+  drawListenerLine,
+  createListenerLine
 };

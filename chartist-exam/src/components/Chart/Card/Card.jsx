@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import DropDown from '../Dropdown/Dropdown';
+import DropDown from '../dropdown/Dropdown';
 
 export class Card extends Component {
   handleRefresh = () => {
