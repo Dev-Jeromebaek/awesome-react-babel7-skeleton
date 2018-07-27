@@ -1,14 +1,16 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from 'react';
 import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from "reactstrap";
+} from 'reactstrap';
 
 class Dropdown extends Component {
   state = {
-    dropdownOpen: false
+    dropdownOpen: false,
+    cycleTitle: '갱신주기 설정',
+    cycleOption: ['10 minutes', '30 minutes', '1 hours']
   };
 
   toggle = () => {
@@ -16,19 +18,34 @@ class Dropdown extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   };
+
+  handleSetCycle = e => {
+    e.stopPropagation();
+    console.log(e.target.value);
+    this.setState({
+      cycleOption: e.target.value
+    });
+  };
+
+  cycleOptionSet = () => {
+    return this.state.cycleOption.forEach(cycle => (
+      <DropdownItem onClick={this.handleSetCycle}>{cycle}</DropdownItem>
+    ));
+  };
+
   render() {
     return (
       <Fragment>
         <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret size="sm" outline color="info">
-            갱신주기 설정
+            {this.state.cycleTitle}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem>10 minutes</DropdownItem>
-            <DropdownItem>30 minutes</DropdownItem>
-            <DropdownItem>1 hours</DropdownItem>
+            {this.cycleOptionSet()}
             <DropdownItem divider />
-            <DropdownItem>set initial</DropdownItem>
+            <DropdownItem onClick={this.handleSetCycle}>
+              set initial
+            </DropdownItem>
           </DropdownMenu>
         </ButtonDropdown>
         &nbsp;&nbsp;&nbsp;

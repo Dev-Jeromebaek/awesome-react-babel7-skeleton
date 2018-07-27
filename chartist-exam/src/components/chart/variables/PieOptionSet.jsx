@@ -1,13 +1,4 @@
 // Data for Pie Chart
-const dataPie = {
-  // labels: ['60%', '10%', '30%'],
-  series: [20, 10, 30]
-};
-const legendPie = {
-  names: ['blue', 'red', 'yellow'],
-  types: ['info', 'danger', 'warning']
-};
-
 const optionSimplePie = {
   donut: true,
   donutWidth: 120,
@@ -169,11 +160,8 @@ const createListenerPie = {
 };
 
 module.exports = {
-  dataPie,
-  legendPie,
   optionSimplePie,
   optionDonutPie,
-  // responsiveOptionsSimplePie,
   drawListenerPie,
   createListenerPie
 };

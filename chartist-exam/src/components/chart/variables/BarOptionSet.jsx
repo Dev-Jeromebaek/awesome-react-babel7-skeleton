@@ -1,24 +1,4 @@
 // Data for Bar Chart
-const dataBar = {
-  labels: [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'Mai',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ],
-  series: [
-    [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-    [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-  ]
-};
 const optionsBar = {
   seriesBarDistance: 10,
   axisX: {
@@ -39,10 +19,6 @@ const responsiveBar = [
     }
   ]
 ];
-const legendBar = {
-  names: ['A', 'B'],
-  types: ['info', 'danger']
-};
 
 const drawListenerBar = {
   draw: function(data) {
@@ -75,10 +51,8 @@ const createListenerBar = {
 };
 
 module.exports = {
-  dataBar,
   optionsBar,
   responsiveBar,
-  legendBar,
   drawListenerBar,
   createListenerBar
 };

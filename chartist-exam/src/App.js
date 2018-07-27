@@ -4,7 +4,7 @@ import Dashboard from './views/dashboard/Dashboard';
 
 class App extends Component {
   render() {
-    return <Dashboard />;
+    return <Dashboard dashboardId={1} />;
   }
 }
 
