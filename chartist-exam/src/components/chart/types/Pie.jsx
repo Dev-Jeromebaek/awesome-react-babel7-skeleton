@@ -10,19 +10,34 @@ import {
   // createListenerPie
 } from '../variables/PieOptionSet';
 
-class PieSet extends Component {
+class Pie extends Component {
   static defaultProps = {
     data: []
   };
   state = {
     dataPie: {
       // labels: ['60%', '10%', '30%'],
-      series: [20, 10, 30]
+      // series: [20, 10, 30, 40, 30, 20]
+      series: []
     },
     legendPie: {
-      names: ['blue', 'red', 'yellow'],
-      types: ['info', 'danger', 'warning']
+      names: ['blue', 'red', 'yellow', 'a', 'b', 'c'],
+      // types: ['info', 'warning', 'warning']
+      // names: ['blue', 'red', 'yellow'],
+      types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
     }
+  };
+
+  bindPassedData = () => {
+    const { graphDataList } = this.props.graphInfo[0];
+    console.log(graphDataList);
+    let tempArr = [];
+    // graphDataList.map(info => )
+    // this.setState({
+    // dataPie: {
+    // series: this.state.dataPie.series.concat({ ...graphDataList.count })
+    // }
+    // });
   };
 
   createLegend = json => {
@@ -33,6 +48,7 @@ class PieSet extends Component {
       legend.push(<i className={type} key={i} />);
       legend.push(' ');
       legend.push(json['names'][i]);
+      legend.push(' ');
     }
     return legend;
   };
@@ -40,16 +56,17 @@ class PieSet extends Component {
   render() {
     console.log(this.props);
     return (
-      <div className="col-md-4">
+      <div className="col-md-8">
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={{this.props.gridLayout}}*/}
         <Card
           statsIcon="fa fa-history"
           title="차트 이름"
           category="상세 설명"
           stats="Updated 10 minutes ago"
           content={
-            <div id="chartPreferences" className="ct-chart ct-perfect-fourth">
+            <div id="chartPreferences" className="ct-chart">
               <ChartistGraph
-                data={this.state.dataPie}
+                data={this.bindPassedData()}
                 type="Pie"
                 options={optionDonutPie}
                 listener={drawListenerPie}
@@ -67,4 +84,4 @@ class PieSet extends Component {
   }
 }
 
-export default PieSet;
+export default Pie;

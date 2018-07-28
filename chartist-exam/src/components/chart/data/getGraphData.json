@@ -164,7 +164,7 @@
       "graphSubType": "BAR_GRAPH"
     },
     {
-      "graphId": 3,
+      "graphId": 4,
       "graphName": "시간별 전체 방문자 수",
       "graphDescription": "시간별 전체 방문자 수 - 1시간 단위",
       "groupNo": 10,

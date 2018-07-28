@@ -10,7 +10,7 @@ import {
   // createListenerBar
 } from '../variables/BarOptionSet';
 
-class BarDataSet extends Component {
+class Bar extends Component {
   state = {
     dataBar: {
       labels: [
@@ -46,6 +46,7 @@ class BarDataSet extends Component {
       legend.push(<i className={type} key={i} />);
       legend.push(' ');
       legend.push(json['names'][i]);
+      legend.push(' ');
     }
     return legend;
   };
@@ -53,6 +54,7 @@ class BarDataSet extends Component {
     console.log(this.props);
     return (
       <div className="col-md-4">
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={{this.props.gridLayout}}*/}
         <Card
           statsIcon="fa fa-history"
           id="chartHours"
@@ -81,4 +83,4 @@ class BarDataSet extends Component {
   }
 }
 
-export default BarDataSet;
+export default Bar;

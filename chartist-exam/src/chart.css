@@ -4,11 +4,19 @@
   background-color: #ffffff;
   margin-bottom: 30px;
 }
+.card-plain {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+.card-plain .image {
+  border-radius: 4px;
+}
 .card .content {
   padding: 15px 15px 10px 15px;
 }
 .card .header {
-  padding: 15px 15px 0;
+  padding: 10px 15px 0;
 }
 .card .category,
 .card label {
@@ -45,7 +53,7 @@
   margin: 0;
 }
 .card .ct-chart {
-  margin: 30px 0 30px;
+  margin: -15px 0 0px;
   height: 245px;
 }
 
@@ -275,6 +283,10 @@
   fill: #9368e9;
 }
 
+.text-grape {
+  color: #9368e9 !important;
+}
+
 .ct-series-e .ct-point,
 .ct-series-e .ct-line,
 .ct-series-e .ct-bar,
@@ -287,6 +299,10 @@
   fill: #87cb16;
 }
 
+.text-grass {
+  color: #87cb16 !important;
+}
+
 .ct-series-f .ct-point,
 .ct-series-f .ct-line,
 .ct-series-f .ct-bar,
@@ -297,6 +313,10 @@
 .ct-series-f .ct-slice-pie,
 .ct-series-f .ct-area {
   fill: #1b8dff;
+}
+
+.text-sea {
+  color: #1b8dff !important;
 }
 
 .ct-series-g .ct-point,

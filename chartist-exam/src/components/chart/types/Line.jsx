@@ -11,7 +11,7 @@ import {
   // createListenerLine
 } from '../variables/LineOptionSet';
 
-class LineDataSet extends Component {
+class Line extends Component {
   state = {
     dataLine: {
       labels: [
@@ -44,6 +44,7 @@ class LineDataSet extends Component {
       legend.push(<i className={type} key={i} />);
       legend.push(' ');
       legend.push(json['names'][i]);
+      legend.push(' ');
     }
     return legend;
   };
@@ -51,6 +52,7 @@ class LineDataSet extends Component {
     console.log(this.props);
     return (
       <div className="col-md-4">
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={{this.props.gridLayout}}*/}
         <Card
           statsIcon="fa fa-history"
           id="chartHours"
@@ -79,4 +81,4 @@ class LineDataSet extends Component {
   }
 }
 
-export default LineDataSet;
+export default Line;
