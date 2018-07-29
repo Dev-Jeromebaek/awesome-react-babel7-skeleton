@@ -35,7 +35,25 @@ class Bar extends Component {
     legendBar: {
       names: ['A', 'B'],
       types: ['info', 'danger']
+    },
+    gridLayout: {
+      w: this.props.gridSize.w,
+      h: 1,
+      x: 0,
+      y: 0
     }
+  };
+
+  bindPassedGraphData = () => {
+    const { graphDataList } = this.props.graphInfo[0];
+    console.log(graphDataList);
+    let tempArr = [];
+    // graphDataList.map(info => )
+    // this.setState({
+    // dataPie: {
+    // series: this.state.dataPie.series.concat({ ...graphDataList.count })
+    // }
+    // });
   };
 
   createLegend = json => {
@@ -54,7 +72,7 @@ class Bar extends Component {
     console.log(this.props);
     return (
       <div className="col-md-4">
-        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={{this.props.gridLayout}}*/}
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={}*/}
         <Card
           statsIcon="fa fa-history"
           id="chartHours"
@@ -64,7 +82,7 @@ class Bar extends Component {
           content={
             <div className="ct-chart">
               <ChartistGraph
-                data={this.state.dataBar}
+                data={this.bindPassedGraphData()}
                 type="Bar"
                 options={optionsBar}
                 responsiveOptions={responsiveBar}

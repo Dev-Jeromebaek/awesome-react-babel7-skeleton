@@ -25,10 +25,16 @@ class Pie extends Component {
       // types: ['info', 'warning', 'warning']
       // names: ['blue', 'red', 'yellow'],
       types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
+    },
+    gridLayout: {
+      w: this.props.gridSize.w,
+      h: 1,
+      x: 0,
+      y: 0
     }
   };
 
-  bindPassedData = () => {
+  bindPassedGraphData = () => {
     const { graphDataList } = this.props.graphInfo[0];
     console.log(graphDataList);
     let tempArr = [];
@@ -57,7 +63,7 @@ class Pie extends Component {
     console.log(this.props);
     return (
       <div className="col-md-8">
-        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={{this.props.gridLayout}}*/}
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={}*/}
         <Card
           statsIcon="fa fa-history"
           title="차트 이름"
@@ -66,7 +72,7 @@ class Pie extends Component {
           content={
             <div id="chartPreferences" className="ct-chart">
               <ChartistGraph
-                data={this.bindPassedData()}
+                data={this.bindPassedGraphData()}
                 type="Pie"
                 options={optionDonutPie}
                 listener={drawListenerPie}

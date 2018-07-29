@@ -8,17 +8,6 @@ import Line from '../../components/chart/types/Line';
 import Pie from '../../components/chart/types/Pie';
 
 class Dashboard extends Component {
-  state = {
-    prev_row: 0,
-    next_row: 0,
-    gridLayout: {
-      w: 0,
-      h: 1,
-      x: 0,
-      y: 0
-    }
-  };
-
   passOnGraphData = id => {
     return graphData.graph_data.filter(info => info.graphId === id);
   };
@@ -71,7 +60,7 @@ class Dashboard extends Component {
           <Bar
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}
-            gridLayout={this.setDataGrid(1)}
+            gridSize={{ w: 1 }}
             key={ct_info.collectionId}
           />
         );
@@ -81,7 +70,7 @@ class Dashboard extends Component {
           <Pie
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}
-            gridLayout={this.setDataGrid(1)}
+            gridSize={{ w: 1 }}
             key={ct_info.collectionId}
           />
         );
@@ -91,7 +80,7 @@ class Dashboard extends Component {
           <Line
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}
-            gridLayout={this.setDataGrid(2)}
+            gridSize={{ w: 2 }}
             key={ct_info.collectionId}
           />
         );
