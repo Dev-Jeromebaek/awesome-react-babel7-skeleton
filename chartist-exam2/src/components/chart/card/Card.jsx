@@ -8,14 +8,14 @@ export class Card extends Component {
   };
 
   componentDidMount() {
-    this.timer = setInterval(this.intervalTimer, 60000);
+    this.timer = setInterval(this.minTimer, 60000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
   }
 
-  intervalTimer = () => {
+  minTimer = () => {
     console.log(this.state.minutes);
     this.setState({ minutes: this.state.minutes + 1 });
   };
@@ -25,7 +25,7 @@ export class Card extends Component {
     this.setState({
       minutes: 0
     });
-    this.timer = setInterval(this.intervalTimer, 60000);
+    this.timer = setInterval(this.minTimer, 60000);
   };
   render() {
     let minutes = this.state.minutes;

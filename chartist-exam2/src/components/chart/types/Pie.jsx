@@ -15,12 +15,9 @@ class Pie extends Component {
     updateTime: 0
   };
   dataPie = {
-    // labels: ['60%', '10%', '30%'],
-    // series: [20, 10, 30, 40, 30, 20]
     series: []
   };
   legendPie = {
-    // names: ['blue', 'red', 'yellow', 'a', 'b', 'c'],
     names: [],
     types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
   };
