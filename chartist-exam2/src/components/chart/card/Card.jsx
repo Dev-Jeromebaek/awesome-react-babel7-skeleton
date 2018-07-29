@@ -28,9 +28,9 @@ export class Card extends Component {
 
           <div className="footer">
             {this.props.legend}
-            {this.props.stats != null ? <hr /> : ''}
+            {this.props.updateStats != null ? <hr /> : ''}
             <div className="stats">
-              <i className={this.props.statsIcon} /> {this.props.stats}
+              <i className={this.props.statsIcon} /> {this.props.updateStats}
             </div>
           </div>
         </div>

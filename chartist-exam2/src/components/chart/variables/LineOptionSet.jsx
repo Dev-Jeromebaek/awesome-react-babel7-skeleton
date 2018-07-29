@@ -1,18 +1,18 @@
 // Data for Line Chart
 const optionsLine = {
-  low: 0,
-  high: 800,
+  // low: 0,
+  // high: 800,
   showArea: false,
   height: '245px',
   axisX: {
-    showGrid: false
+    showGrid: true
   },
   lineSmooth: true,
   showLine: true,
   showPoint: true,
   fullWidth: true,
   chartPadding: {
-    right: 50
+    right: 30
   }
 };
 const optionsArea = {
@@ -50,8 +50,8 @@ const createListenerLine = {
     if (data.type === 'line' || data.type === 'area') {
       data.element.animate({
         d: {
-          begin: 2000 * data.index,
-          dur: 2000,
+          begin: 600 * data.index,
+          dur: 600,
           from: data.path
             .clone()
             .scale(1, 0)
@@ -70,8 +70,8 @@ const drawListenerLine = {
     if (data.type === 'line' || data.type === 'area') {
       data.element.animate({
         d: {
-          begin: 2000 * data.index,
-          dur: 2000,
+          begin: 600 * data.index,
+          dur: 600,
           from: data.path
             .clone()
             .scale(1, 0)

@@ -11,41 +11,48 @@ import {
 } from '../variables/BarOptionSet';
 
 class Bar extends Component {
+  state = {
+    updateTime: 0
+  };
   dataBar = {
-    labels: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ],
-    series: [
-      [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-      [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-    ]
+    labels: [],
+    series: []
   };
   legendBar = {
-    names: ['A', 'B'],
+    names: [],
     types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
   };
 
   bindPassedGraphData = () => {
-    const { graphDataList } = this.props.graphInfo[0];
-    console.log(graphDataList);
+    const { graphDataList, baseType, dataType } = this.props.graphInfo[0];
     let tempArr = [];
-    // graphDataList.map(info => )
-    // this.setState({
-    // dataPie: {
-    // series: this.state.dataPie.series.concat({ ...graphDataList.count })
-    // }
-    // });
+
+    graphDataList.map(info => {
+      tempArr.push(info.y);
+      this.dataBar.labels.push(info.x.split(' ~ ')[1]);
+    });
+    console.log(this.dataBar);
+
+    this.legendBar.names.length = 0;
+    this.legendBar.names.push(
+      [],
+      [],
+      [],
+      // ['X축: ' + baseType.title + ' / Y축: ' + dataType + '(단위: 100)']
+      ['X축: ' + baseType.title + ' / Y축: ' + dataType]
+    );
+
+    // 1. 각각 x 값마다 색상 다르게 그래프 그리기.
+    for (let i = 0; i < tempArr.length; i++) {
+      let newArr = [];
+      for (let j = 0; j < tempArr.length; j++) {
+        newArr.push(i === j ? tempArr[i] : 0);
+      }
+      this.dataBar.series.push(newArr);
+    }
+
+    // 2. 같은 색상으로 그래프 그리기
+    // this.dataBar.series.push(tempArr);
     return this.dataBar;
   };
 
@@ -66,13 +73,14 @@ class Bar extends Component {
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
       <div className="col-md-4">
-        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={this.state.gridLayout}*/}
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={}*/}
         <Card
           statsIcon="fa fa-history"
           id="chartHours"
           title={graphName}
           category={graphDescription}
-          stats="Updated 3 minutes ago"
+          updateStats={'업데이트된지' + this.state.updateTime + ' 지났습니다.'}
+          updateTime={this.state.updateTime}
           content={
             <div className="ct-chart">
               <ChartistGraph

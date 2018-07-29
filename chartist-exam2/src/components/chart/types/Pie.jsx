@@ -11,6 +11,9 @@ import {
 } from '../variables/PieOptionSet';
 
 class Pie extends Component {
+  state = {
+    updateTime: 0
+  };
   dataPie = {
     // labels: ['60%', '10%', '30%'],
     // series: [20, 10, 30, 40, 30, 20]
@@ -20,12 +23,10 @@ class Pie extends Component {
     // names: ['blue', 'red', 'yellow', 'a', 'b', 'c'],
     names: [],
     types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
-    // types: []
   };
 
   bindPassedGraphData = () => {
     const { graphDataList } = this.props.graphInfo[0];
-
     graphDataList.map(info => {
       this.dataPie.series.push(info.count);
       this.legendPie.names.push(info.pieName);
@@ -47,16 +48,17 @@ class Pie extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
       <div className="col-md-8">
-        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={this.state.gridLayout}*/}
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={}*/}
         <Card
           statsIcon="fa fa-history"
           title={graphName}
           category={graphDescription}
-          stats="Updated 10 minutes ago"
+          // stats="Updated 10 minutes ago"
+          updateStats={'업데이트된지' + this.state.updateTime + ' 지났습니다.'}
+          updateTime={this.state.updateTime}
           content={
             <div id="chartPreferences" className="ct-chart">
               <ChartistGraph

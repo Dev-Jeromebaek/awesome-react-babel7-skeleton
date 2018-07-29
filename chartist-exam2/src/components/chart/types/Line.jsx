@@ -12,39 +12,50 @@ import {
 } from '../variables/LineOptionSet';
 
 class Line extends Component {
+  state = {
+    updateTime: 0
+  };
   dataLine = {
-    labels: [
-      '9:00AM',
-      '12:00AM',
-      '3:00PM',
-      '6:00PM',
-      '9:00PM',
-      '12:00PM',
-      '3:00AM',
-      '6:00AM'
-    ],
-    series: [
-      [287, 385, 490, 492, 554, 586, 698, 695],
-      [67, 152, 143, 240, 287, 335, 435, 437],
-      [23, 113, 67, 108, 190, 239, 307, 308]
-    ]
+    labels: [],
+    series: []
   };
   legendLine = {
-    names: ['가', '나', '다'],
+    names: [],
     types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
   };
 
   bindPassedGraphData = () => {
-    // const {
-    //   graphInfo,
-    //   graphInfo: { graphDataList }
-    // } = this.props;
-    // console.log(graphInfo);
-    // console.log(graphDataList);
-    // graphDataList.map(info => {
-    //   this.dataLine.series.push(info.y);
-    //   this.legendLine.names.push(info.x);
+    const { graphDataList, baseType, dataType } = this.props.graphInfo[0];
+    let tempArr = [];
+
+    graphDataList.map(info => {
+      tempArr.push(info.y);
+      this.dataLine.labels.push(info.x.split(' ~ ')[1]);
+    });
+    console.log(this.dataLine);
+
+    this.legendLine.names.push([
+      'X축: ' + baseType.title + ' / Y축: ' + dataType
+      // 'X축: ' + baseType.title + ' / Y축: ' + dataType + '(단위: 100)'
+    ]);
+
+    // 2. 같은 색상으로 그래프 그리기
+    this.dataLine.series.push(tempArr);
+
+    // let sortArr = tempArr.sort((a, b) => {
+    //   return a - b;
     // });
+    // console.log(sortArr);
+    // let low = sortArr[0] > 100 ? sortArr[0] - 100 : sortArr[0];
+    // let high = sortArr[sortArr.length - 1] + 100;
+    // this.optionsLine.low = low * 0.01;
+    // this.optionsArea.low = low * 0.01;
+    // this.optionsLine.low = low;
+    // this.optionsArea.low = low;
+    // this.optionsLine.high = high;
+    // this.optionsArea.high = high;
+    // this.optionsLine.high = high * 0.01;
+    // this.optionsArea.high = high * 0.01;
     return this.dataLine;
   };
 
@@ -65,13 +76,14 @@ class Line extends Component {
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
       <div className="col-md-4">
-        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={this.state.gridLayout}*/}
+        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={}*/}
         <Card
           statsIcon="fa fa-history"
           id="chartHours"
           title={graphName}
           category={graphDescription}
-          stats="Updated 3 minutes ago"
+          updateStats={'업데이트된지' + this.state.updateTime + ' 지났습니다.'}
+          updateTime={this.state.updateTime}
           content={
             <div className="ct-chart">
               <ChartistGraph

@@ -30,22 +30,6 @@ class Grid extends Component {
     console.log(w);
     console.log(collectionId);
     console.log(this.gridSize);
-    if (collectionId === 1) {
-      // this.setState({
-      //   gridSize: this.gridSize
-      // });
-    }
-    //   this.afterGrid = {
-    //     x: w === 1 ? 1 : 2
-    //   };
-    // } else {
-    //   this.setLayout(w);
-    // }
-    // console.log(this.gridSize);
-    // collectionId === 1
-    //   ?
-    //   :
-    // return this.state.gridSize;
   };
 
   setLayout = w => {
