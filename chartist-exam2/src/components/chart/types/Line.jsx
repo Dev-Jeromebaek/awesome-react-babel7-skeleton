@@ -28,7 +28,7 @@ class Line extends Component {
     const { graphDataList, baseType, dataType } = this.props.graphInfo[0];
     let tempArr = [];
 
-    graphDataList.map(info => {
+    graphDataList.forEach(info => {
       tempArr.push(info.y);
       this.dataLine.labels.push(info.x.split(' ~ ')[1]);
     });
@@ -82,8 +82,8 @@ class Line extends Component {
           id="chartHours"
           title={graphName}
           category={graphDescription}
-          updateStats={'업데이트된지' + this.state.updateTime + ' 지났습니다.'}
           updateTime={this.state.updateTime}
+          start={Date.now()}
           content={
             <div className="ct-chart">
               <ChartistGraph
