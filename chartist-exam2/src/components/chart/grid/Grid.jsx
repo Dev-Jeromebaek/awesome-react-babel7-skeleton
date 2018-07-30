@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import graphData from '../data/getGraphData.json';
-// import DrawChart from '../types/DrawChart';
-import Bar from '../types/Bar';
-import Line from '../types/Line';
-import Pie from '../types/Pie';
+import DrawChart from '../types/DrawChart';
 
 class Grid extends Component {
   state = {
@@ -26,20 +23,20 @@ class Grid extends Component {
     return graphData.graph_data.filter(info => info.graphId === id);
   };
 
-  setDataGrid = (w, collectionId) => {
-    console.log(w);
-    console.log(collectionId);
-    console.log(this.gridSize);
-  };
+  // setDataGrid = (w, collectionId) => {
+  // console.log(w);
+  // console.log(collectionId);
+  // console.log(this.gridSize);
+  // };
 
-  setLayout = w => {
-    // if (w === 1) {
-    //   console.log(this.tempArea.length);
-    //   console.log(this.afterGrid);
-    // } else {
-    //   console.log(this.afterGrid);
-    // }
-  };
+  // setLayout = w => {
+  // if (w === 1) {
+  //   console.log(this.tempArea.length);
+  //   console.log(this.afterGrid);
+  // } else {
+  //   console.log(this.afterGrid);
+  // }
+  // };
 
   createChartList = id => {
     // 1개의 dashboard에 포함된 graphCollection 정보(배열)
@@ -49,38 +46,50 @@ class Grid extends Component {
     graphCollection.forEach(ct_info => {
       if (ct_info.graphDetailType === 'BAR_GRAPH') {
         chartList.push(
-          // <DrawChart
-          //   graphInfo={this.passOnGraphData(ct_info.graphId)}
-          //   layoutKey={ct_info.collectionId}
-          //   gridSize={this.setDataGrid(1, ct_info.collectionId)}
-          //   key={ct_info.collectionId}
-          // />
-          <Bar
+          <DrawChart
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}
-            gridSize={this.setDataGrid(1, ct_info.collectionId)}
+            // gridSize={this.setDataGrid(1, ct_info.collectionId)}
             key={ct_info.collectionId}
           />
+          // <Bar
+          //   graphInfo={this.passOnGraphData(ct_info.graphId)}
+          //   layoutKey={ct_info.collectionId}
+          //   // gridSize={this.setDataGrid(1, ct_info.collectionId)}
+          //   key={ct_info.collectionId}
+          // />
         );
       }
       if (ct_info.graphDetailType === 'PIE_GRAPH') {
         chartList.push(
-          <Pie
+          <DrawChart
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}
-            gridSize={this.setDataGrid(1, ct_info.collectionId)}
+            // gridSize={this.setDataGrid(1, ct_info.collectionId)}
             key={ct_info.collectionId}
           />
+          //     <Pie
+          //       graphInfo={this.passOnGraphData(ct_info.graphId)}
+          //       layoutKey={ct_info.collectionId}
+          //       // gridSize={this.setDataGrid(1, ct_info.collectionId)}
+          //       key={ct_info.collectionId}
+          //     />
         );
       }
       if (ct_info.graphDetailType === 'LINEAR_GRAPH') {
         chartList.push(
-          <Line
+          <DrawChart
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}
-            gridSize={this.setDataGrid(2, ct_info.collectionId)}
+            // gridSize={this.setDataGrid(1, ct_info.collectionId)}
             key={ct_info.collectionId}
           />
+          //     <Line
+          //       graphInfo={this.passOnGraphData(ct_info.graphId)}
+          //       layoutKey={ct_info.collectionId}
+          //       // gridSize={this.setDataGrid(2, ct_info.collectionId)}
+          //       key={ct_info.collectionId}
+          //     />
         );
       }
     });

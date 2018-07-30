@@ -21,16 +21,15 @@ class Dropdown extends Component {
 
   handleSetCycle = e => {
     e.stopPropagation();
-    console.log(e.target.value);
+    // console.log(this.state.cycleOption);
+    // console.log(e.target.value);
     this.setState({
-      cycleOption: e.target.value
+      cycleTitle: e.target.value
     });
-  };
-
-  cycleOptionSet = () => {
-    return this.state.cycleOption.forEach(cycle => (
-      <DropdownItem onClick={this.handleSetCycle}>{cycle}</DropdownItem>
-    ));
+    let cycleTime = e.target.value.split(' ')[0];
+    if (cycleTime === '1' || cycleTime === '갱신주기') cycleTime = '60';
+    const { setCycle } = this.props;
+    setCycle(parseInt(cycleTime, 10));
   };
 
   render() {
@@ -41,15 +40,33 @@ class Dropdown extends Component {
             {this.state.cycleTitle}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.handleSetCycle}>
+            <DropdownItem
+              onClick={this.handleSetCycle}
+              value="10 minutes"
+              // cycleTime={10}
+            >
               10 minutes
             </DropdownItem>
-            <DropdownItem onClick={this.handleSetCycle}>
+            <DropdownItem
+              onClick={this.handleSetCycle}
+              value="30 minutes"
+              // cycleTime={30}
+            >
               30 minutes
             </DropdownItem>
-            <DropdownItem onClick={this.handleSetCycle}>1 hours</DropdownItem>
+            <DropdownItem
+              onClick={this.handleSetCycle}
+              value="1 hours"
+              // cycleTime={60}
+            >
+              1 hours
+            </DropdownItem>
             <DropdownItem divider />
-            <DropdownItem onClick={this.handleSetCycle}>
+            <DropdownItem
+              onClick={this.handleSetCycle}
+              value="갱신주기 설정"
+              // cycleTime={60}
+            >
               set initial
             </DropdownItem>
           </DropdownMenu>

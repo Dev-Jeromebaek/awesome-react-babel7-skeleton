@@ -3,47 +3,21 @@ import React, { Component } from 'react';
 import DropDown from '../dropdown/Dropdown';
 
 export class Card extends Component {
-  state = {
-    minutes: 0
-  };
-
-  componentDidMount() {
-    // 테스트를 위해 3초로 변경 원래 값은 1분
-    this.timer = setInterval(this.minTimer, 3000);
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps !== this.props) {
-  //     this.setState({ minutes: 0 });
-  //   }
-  // }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  minTimer = () => {
-    this.setState({ minutes: this.state.minutes + 1 });
-  };
-
   handleRefresh = () => {
-    clearInterval(this.timer);
-    this.setState({
-      minutes: 0
-    });
-    // 테스트를 위해 3초로 변경 원래 값은 1분
-    this.timer = setInterval(this.minTimer, 3000);
+    // console.log('refresh - Card');
+    const { onRefresh } = this.props;
+    onRefresh();
   };
   render() {
-    let minutes = this.state.minutes;
-    console.log(minutes);
+    // console.log(this.props);
+    const { setCycle } = this.props;
     return (
       <div className={'card' + (this.props.plain ? ' card-plain' : '')}>
         <div className={'header' + (this.props.hCenter ? ' text-center' : '')}>
           <h4 className="title state d-flex justify-content-between">
             {this.props.title}
             <div className="d-flex">
-              <DropDown />
+              <DropDown setCycle={setCycle} />
               <i
                 className={this.props.statsIcon}
                 style={{ cursor: 'pointer' }}
@@ -62,7 +36,7 @@ export class Card extends Component {
             <div className="stats">
               <i className={this.props.statsIcon} />&nbsp;
               {/* '업데이트된지'{minutes}'분 지났습니다.' */}
-              Updated '{minutes}' minutes ago
+              Updated {this.props.minutes} minutes ago
             </div>
           </div>
         </div>

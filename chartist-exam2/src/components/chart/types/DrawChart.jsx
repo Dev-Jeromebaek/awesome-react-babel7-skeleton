@@ -1,49 +1,30 @@
 import React, { Component } from 'react';
-// import ChartistGraph from 'react-chartist';
 
 import { Card } from '../card/Card';
-import { barUpdateFunction } from './chartUtil';
+import { ChartDataSet } from '../variables/ChartDataSet';
+import Line from './Line';
 import Bar from './Bar';
-// import {
-//   optionsBar,
-//   responsiveBar,
-//   drawListenerBar
-//   // createListenerBar
-// } from '../variables/BarOptionSet';
+import Pie from './Pie';
 
 class DrawChart extends Component {
   state = {
-    setCycle: this.props.graphInfo[0].graphUpdateCycle - 3591,
+    setCycle: Math.floor(this.props.graphInfo[0].graphUpdateCycle / 60),
     cycleTime: 1,
     // cycleTime: 3599000
-    dataBar: {
+    data: {
       labels: [],
       series: []
     },
-    legendBar: {
+    legend: {
       names: [],
-      types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
+      types: []
     },
     minutes: 0
   };
 
-  // componentDidUpdate(prevState) {
-  //   console.log('componentDidUpdate');
-  //   if (this.state.cycleTime !== prevState.cycleTime) {
-  //     console.log('cycle값이 바뀜!', this.state.cycleTime);
-  //   }
-  // }
-
-  // shouldComponentUpdate() {
-  //   if (this.state.cycleTime === 1) {
-  //     this.updateGraphData();
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   componentDidMount() {
     this.updateGraphData();
+    // this.updateTimer = setInterval(this.proceedCycleTimer, 60000);
     this.updateTimer = setInterval(this.proceedCycleTimer, 1000);
   }
 
@@ -58,7 +39,12 @@ class DrawChart extends Component {
         minutes: this.state.minutes + 1
       },
       () => {
-        if (this.state.cycleTime === 1) {
+        // console.log(this.state.cycleTime);
+        if (this.state.cycleTime < 1) {
+          this.updateGraphData();
+          return true;
+        }
+        if (this.state.setCycle < this.state.minutes) {
           this.updateGraphData();
           return true;
         }
@@ -66,11 +52,39 @@ class DrawChart extends Component {
     );
   };
 
+  onCycleChange = cycleTime => {
+    // console.log('onCycleChange - drawChart');
+    // console.log(cycleTime);
+    this.setState({
+      setCycle: cycleTime,
+      cycleTime: 1
+    });
+  };
+
+  onRefreshClick = () => {
+    // console.log('refresh - drawChart');
+    this.setState({
+      cycleTime: 1,
+      minutes: 0
+    });
+  };
+
   updateGraphData = () => {
-    const { graphDataList, baseType, dataType } = this.props.graphInfo[0];
-    console.log(this.props.graphInfo[0]);
+    const {
+      graphDataList,
+      graphSubType,
+      baseType,
+      dataType
+    } = this.props.graphInfo[0];
+    // console.log(this.props.graphInfo[0]);
     this.setState(
-      barUpdateFunction(graphDataList, baseType, dataType, this.state.setCycle)
+      ChartDataSet(
+        graphDataList,
+        graphSubType,
+        baseType,
+        dataType,
+        this.state.setCycle
+      )
     );
     // 2. 같은 색상으로 그래프 그리기
     // this.dataBar.series.push(tempArr);
@@ -88,6 +102,22 @@ class DrawChart extends Component {
     }
     return legend;
   };
+
+  chartTypeCheck = () => {
+    const { graphSubType } = this.props.graphInfo[0];
+    if (graphSubType === 'LINEAR_GRAPH')
+      return (
+        <Line data={this.state.data} cycleTime={this.state.cycleTime === 1} />
+      );
+    if (graphSubType === 'BAR_GRAPH')
+      return (
+        <Bar data={this.state.data} cycleTime={this.state.cycleTime === 1} />
+      );
+    if (graphSubType === 'PIE_GRAPH')
+      return (
+        <Pie data={this.state.data} cycleTime={this.state.cycleTime === 1} />
+      );
+  };
   render() {
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
@@ -97,17 +127,11 @@ class DrawChart extends Component {
           statsIcon="fa fa-history"
           title={graphName}
           category={graphDescription}
-          updateTime={this.state.graphUpdateCycle}
-          content={
-            <div className="ct-chart">
-              <Bar
-                rerender={this.state.cycleTime === this.state.setCycle}
-                data={this.state.dataBar}
-              />
-            </div>
-          }
-          legend={this.createLegend(this.state.legendBar)}
+          content={<div className="ct-chart">{this.chartTypeCheck()}</div>}
+          legend={this.createLegend(this.state.legend)}
           minutes={this.state.minutes}
+          setCycle={this.onCycleChange}
+          onRefresh={this.onRefreshClick}
         />
       </div>
     );
