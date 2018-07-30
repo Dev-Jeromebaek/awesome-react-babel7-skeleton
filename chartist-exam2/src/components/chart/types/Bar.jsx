@@ -12,48 +12,95 @@ import {
 
 class Bar extends Component {
   state = {
-    updateTime: 0
-  };
-  dataBar = {
-    labels: [],
-    series: []
-  };
-  legendBar = {
-    names: [],
-    types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
+    setCycle: this.props.graphInfo[0].graphUpdateCycle - 3591,
+    cycleTime: 1,
+    // cycleTime: 3599000
+    dataBar: {
+      labels: [],
+      series: []
+    },
+    legendBar: {
+      names: [],
+      types: ['info', 'danger', 'warning', 'grape', 'grass', 'sea']
+    },
+    minutes: 0
   };
 
-  bindPassedGraphData = () => {
+  componentDidUpdate(prevState) {
+    console.log('componentDidUpdate');
+    if (this.state.cycleTime !== prevState.cycleTime) {
+      console.log('cycle값이 바뀜!', this.state.cycleTime);
+    }
+  }
+
+  shouldComponentUpdate() {
+    // console.log('shouldComponentUpdate');
+    console.log(this.state.cycleTime);
+    if (this.state.cycleTime === 1) {
+      this.updateGraphData();
+      return true;
+    }
+    return false;
+  }
+
+  componentDidMount() {
+    this.updateGraphData();
+    this.updateTimer = setInterval(this.proceedCycleTimer, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.updateTimer);
+  }
+
+  proceedCycleTimer = () => {
+    this.setState({
+      cycleTime: this.state.cycleTime - 1
+      // minutes: this.state.minutes + 1
+    });
+  };
+
+  updateGraphData = () => {
     const { graphDataList, baseType, dataType } = this.props.graphInfo[0];
+
+    let names = [['X: ' + baseType.title], ['Y: ' + dataType]];
+    let types = ['info', 'danger', 'warning', 'grape', 'grass', 'sea'];
+
     let tempArr = [];
 
-    graphDataList.forEach(info => {
+    const labels = graphDataList.map(info => {
       tempArr.push(info.y);
-      this.dataBar.labels.push(info.x.split(' ~ ')[1]);
+      return info.x.split(' ~ ')[1];
     });
-    console.log(this.dataBar);
-
-    this.legendBar.names.length = 0;
-    this.legendBar.names.push(
-      [],
-      [],
-      [],
-      // ['X축: ' + baseType.title + ' / Y축: ' + dataType + '(단위: 100)']
-      ['X축: ' + baseType.title + ' / Y축: ' + dataType]
-    );
 
     // 1. 각각 x 값마다 색상 다르게 그래프 그리기.
-    for (let i = 0; i < tempArr.length; i++) {
+    const series = tempArr.map((arr, index) => {
       let newArr = [];
       for (let j = 0; j < tempArr.length; j++) {
-        newArr.push(i === j ? tempArr[i] : 0);
+        newArr.push(index === j ? arr : 0);
       }
-      this.dataBar.series.push(newArr);
-    }
+      return newArr;
+    });
+
+    this.setState(
+      prevState => ({
+        cycleTime: prevState.setCycle,
+        dataBar: {
+          labels,
+          series
+        },
+        legendBar: {
+          names: names,
+          types: types
+        }
+      }),
+      () => {
+        console.log(this.state.dataBar);
+        console.log(this.state.legendBar);
+      }
+    );
 
     // 2. 같은 색상으로 그래프 그리기
     // this.dataBar.series.push(tempArr);
-    return this.dataBar;
   };
 
   createLegend = json => {
@@ -70,6 +117,7 @@ class Bar extends Component {
   };
   render() {
     console.log(this.props);
+    console.log(this.state.cycleTime);
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
       <div className="col-md-4">
@@ -79,12 +127,11 @@ class Bar extends Component {
           id="chartHours"
           title={graphName}
           category={graphDescription}
-          updateTime={this.state.updateTime}
-          start={Date.now()}
+          updateTime={this.state.graphUpdateCycle}
           content={
             <div className="ct-chart">
               <ChartistGraph
-                data={this.bindPassedGraphData()}
+                data={this.state.dataBar}
                 type="Bar"
                 options={optionsBar}
                 responsiveOptions={responsiveBar}
@@ -92,9 +139,8 @@ class Bar extends Component {
               />
             </div>
           }
-          legend={
-            <div className="legend">{this.createLegend(this.legendBar)}</div>
-          }
+          legend={this.createLegend(this.state.legendBar)}
+          minutes={this.state.minutes}
         />
       </div>
     );

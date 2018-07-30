@@ -12,7 +12,7 @@ import {
 
 class Pie extends Component {
   state = {
-    updateTime: 0
+    updateCycle: 3600
   };
   dataPie = {
     series: []
@@ -24,6 +24,7 @@ class Pie extends Component {
 
   bindPassedGraphData = () => {
     const { graphDataList } = this.props.graphInfo[0];
+
     graphDataList.forEach(info => {
       this.dataPie.series.push(info.count);
       this.legendPie.names.push(info.pieName);
@@ -45,6 +46,7 @@ class Pie extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
       <div className="col-md-8">
@@ -55,7 +57,6 @@ class Pie extends Component {
           category={graphDescription}
           // stats="Updated 10 minutes ago"
           updateTime={this.state.updateTime}
-          start={Date.now()}
           content={
             <div id="chartPreferences" className="ct-chart">
               <ChartistGraph

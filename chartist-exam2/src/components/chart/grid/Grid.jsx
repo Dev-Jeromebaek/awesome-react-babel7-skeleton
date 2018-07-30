@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import graphData from '../data/getGraphData.json';
-
+// import DrawChart from '../types/DrawChart';
 import Bar from '../types/Bar';
 import Line from '../types/Line';
 import Pie from '../types/Pie';
@@ -49,6 +49,12 @@ class Grid extends Component {
     graphCollection.forEach(ct_info => {
       if (ct_info.graphDetailType === 'BAR_GRAPH') {
         chartList.push(
+          // <DrawChart
+          //   graphInfo={this.passOnGraphData(ct_info.graphId)}
+          //   layoutKey={ct_info.collectionId}
+          //   gridSize={this.setDataGrid(1, ct_info.collectionId)}
+          //   key={ct_info.collectionId}
+          // />
           <Bar
             graphInfo={this.passOnGraphData(ct_info.graphId)}
             layoutKey={ct_info.collectionId}

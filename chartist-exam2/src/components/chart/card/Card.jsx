@@ -8,15 +8,21 @@ export class Card extends Component {
   };
 
   componentDidMount() {
-    this.timer = setInterval(this.minTimer, 60000);
+    // 테스트를 위해 3초로 변경 원래 값은 1분
+    this.timer = setInterval(this.minTimer, 3000);
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps !== this.props) {
+  //     this.setState({ minutes: 0 });
+  //   }
+  // }
 
   componentWillUnmount() {
     clearInterval(this.timer);
   }
 
   minTimer = () => {
-    console.log(this.state.minutes);
     this.setState({ minutes: this.state.minutes + 1 });
   };
 
@@ -25,11 +31,12 @@ export class Card extends Component {
     this.setState({
       minutes: 0
     });
-    this.timer = setInterval(this.minTimer, 60000);
+    // 테스트를 위해 3초로 변경 원래 값은 1분
+    this.timer = setInterval(this.minTimer, 3000);
   };
   render() {
     let minutes = this.state.minutes;
-
+    console.log(minutes);
     return (
       <div className={'card' + (this.props.plain ? ' card-plain' : '')}>
         <div className={'header' + (this.props.hCenter ? ' text-center' : '')}>
@@ -50,8 +57,7 @@ export class Card extends Component {
           {this.props.content}
 
           <div className="footer">
-            {this.props.legend}
-            {/* {this.props.updateStats != null ? <hr /> : ''} */}
+            <div className="legend">{this.props.legend}</div>
             <hr />
             <div className="stats">
               <i className={this.props.statsIcon} />&nbsp;

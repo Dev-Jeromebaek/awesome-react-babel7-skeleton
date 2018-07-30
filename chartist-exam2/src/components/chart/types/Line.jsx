@@ -13,7 +13,7 @@ import {
 
 class Line extends Component {
   state = {
-    updateTime: 0
+    updateCycle: 3600
   };
   dataLine = {
     labels: [],
@@ -26,13 +26,14 @@ class Line extends Component {
 
   bindPassedGraphData = () => {
     const { graphDataList, baseType, dataType } = this.props.graphInfo[0];
+
     let tempArr = [];
 
     graphDataList.forEach(info => {
       tempArr.push(info.y);
       this.dataLine.labels.push(info.x.split(' ~ ')[1]);
     });
-    console.log(this.dataLine);
+    // console.log(this.dataLine);
 
     this.legendLine.names.push([
       'X축: ' + baseType.title + ' / Y축: ' + dataType
@@ -83,7 +84,6 @@ class Line extends Component {
           title={graphName}
           category={graphDescription}
           updateTime={this.state.updateTime}
-          start={Date.now()}
           content={
             <div className="ct-chart">
               <ChartistGraph

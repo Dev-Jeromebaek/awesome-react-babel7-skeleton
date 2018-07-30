@@ -76,7 +76,7 @@
       },
       "dataType": "방문자 수",
       "graphCategory": "전체",
-      "updateCicle": 3600,
+      "graphUpdateCycle": 3601,
       "createDate": "2018-07-13 12:45:35",
       "graphDataList": [
         {
@@ -107,7 +107,7 @@
       "baseType": "여행딜",
       "dataType": "구매 수",
       "graphCategory": "전체",
-      "updateCicle": 3600,
+      "graphUpdateCycle": 3603,
       "createDate": "2018-07-13 12:45:35",
       "graphDataList": [
         {
@@ -141,7 +141,7 @@
       },
       "dataType": "방문자 수",
       "graphCategory": "전체",
-      "updateCicle": 3600,
+      "graphUpdateCycle": 3605,
       "createDate": "2018-07-13 12:45:35",
       "graphDataList": [
         {
@@ -175,7 +175,7 @@
       },
       "dataType": "방문자 수",
       "graphCategory": "전체",
-      "updateCicle": 3600,
+      "graphUpdateCycle": 3607,
       "createDate": "2018-07-13 12:45:35",
       "graphDataList": [
         {
