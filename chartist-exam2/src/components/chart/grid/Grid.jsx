@@ -4,6 +4,9 @@ import graphData from '../data/getGraphData.json';
 import DrawChart from '../draw/DrawChart';
 
 class Grid extends Component {
+  state = {
+    tempArr: []
+  };
   tempArea = [];
   nextFillGrid = {
     x: 0,
@@ -97,12 +100,12 @@ class Grid extends Component {
     const { graphCollection } = graphData.dashboard_list[id - 1];
 
     let chartList = [];
-    graphCollection.forEach(ct_info => {
+    graphCollection.map(ct_info => {
       chartList.push(
         <DrawChart
           graphInfo={this.passOnGraphData(ct_info.graphId)}
           layoutKey={ct_info.collectionId}
-          dataGrid={this.setGridLayout(ct_info)}
+          // dataGrid={this.setGridLayout(ct_info)}
           key={ct_info.collectionId}
         />
       );
