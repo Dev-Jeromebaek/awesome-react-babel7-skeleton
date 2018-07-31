@@ -33,14 +33,53 @@ const optionsArea = {
 };
 const responsiveLine = [
   [
-    'screen and (max-width: 640px)',
+    'screen and (max-width: 1560px) and (min-width:1000px)',
     {
+      seriesBarDistance: 5,
       axisX: {
         labelInterpolationFnc: function(value) {
-          return value[0];
+          const sliceValue = value.split(' ')[1];
+          return sliceValue;
         }
       }
     }
+  ],
+  [
+    'screen and (max-width: 767px) and (min-width: 550px)',
+    {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function(value) {
+          return value;
+        }
+      }
+    }
+  ],
+  [
+    'screen and (max-width: 550px)',
+    {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function(value) {
+          const sliceValue = value.split(' ')[1];
+          return sliceValue;
+        }
+      }
+    }
+
+    // 'screen and (max-width: 640px)',
+    // {
+    //   seriesBarDistance: 5,
+    //   axisX: {
+    //     labelInterpolationFnc: function(value) {
+    //       console.log(value);
+    //       const sliceValue = value.split(' ')[1];
+    //       console.log(sliceValue);
+    //       // return value[0];
+    //       return sliceValue;
+    //     }
+    //   }
+    // }
   ]
 ];
 

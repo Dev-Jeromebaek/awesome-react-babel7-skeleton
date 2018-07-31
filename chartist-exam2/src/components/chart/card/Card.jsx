@@ -14,7 +14,7 @@ export class Card extends Component {
     return (
       <div className={'card' + (this.props.plain ? ' card-plain' : '')}>
         <div className={'header' + (this.props.hCenter ? ' text-center' : '')}>
-          <h4 className="title state d-flex justify-content-between">
+          <h5 className="title state d-flex justify-content-between">
             {this.props.title}
             <div className="d-flex">
               <DropDown setCycle={setCycle} />
@@ -24,7 +24,7 @@ export class Card extends Component {
                 onClick={this.handleRefresh}
               />
             </div>
-          </h4>
+          </h5>
           <p className="category">{this.props.category}</p>
         </div>
         <div className="content">
@@ -34,9 +34,8 @@ export class Card extends Component {
             <div className="legend">{this.props.legend}</div>
             <hr />
             <div className="stats">
-              <i className={this.props.statsIcon} />&nbsp;
-              {/* '업데이트된지'{minutes}'분 지났습니다.' */}
-              Updated {this.props.minutes} minutes ago
+              <i className={this.props.statsIcon} />&nbsp; Updated{' '}
+              {this.props.minutes} minutes ago
             </div>
           </div>
         </div>

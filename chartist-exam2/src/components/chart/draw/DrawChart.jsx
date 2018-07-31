@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import { Card } from '../card/Card';
 import { ChartDataSet } from '../variables/ChartDataSet';
-import Line from './Line';
-import Bar from './Bar';
-import Pie from './Pie';
+import Line from '../types/Line';
+import Bar from '../types/Bar';
+import Pie from '../types/Pie';
 
 class DrawChart extends Component {
   state = {
@@ -53,8 +53,6 @@ class DrawChart extends Component {
   };
 
   onCycleChange = cycleTime => {
-    // console.log('onCycleChange - drawChart');
-    // console.log(cycleTime);
     this.setState({
       setCycle: cycleTime,
       cycleTime: 1
@@ -62,7 +60,6 @@ class DrawChart extends Component {
   };
 
   onRefreshClick = () => {
-    // console.log('refresh - drawChart');
     this.setState({
       cycleTime: 1,
       minutes: 0
@@ -76,7 +73,6 @@ class DrawChart extends Component {
       baseType,
       dataType
     } = this.props.graphInfo[0];
-    // console.log(this.props.graphInfo[0]);
     this.setState(
       ChartDataSet(
         graphDataList,
@@ -122,7 +118,11 @@ class DrawChart extends Component {
     const { graphName, graphDescription } = this.props.graphInfo[0];
     return (
       <div className="col-md-4">
-        {/* <div className="bg-white" key={this.props.layoutKey}> data-grid={}*/}
+        {/* <div
+        className="bg-white"
+        key={this.props.layoutKey}
+        data-grid={this.props.dataGrid}
+      >*/}
         <Card
           statsIcon="fa fa-history"
           title={graphName}

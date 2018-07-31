@@ -9,8 +9,7 @@ import {
 class Dropdown extends Component {
   state = {
     dropdownOpen: false,
-    cycleTitle: '갱신주기 설정',
-    cycleOption: ['10 minutes', '30 minutes', '1 hours']
+    cycleTitle: '갱신주기 설정'
   };
 
   toggle = () => {
@@ -19,10 +18,11 @@ class Dropdown extends Component {
     });
   };
 
+  hi = e => {
+    console.log('dd');
+  };
   handleSetCycle = e => {
     e.stopPropagation();
-    // console.log(this.state.cycleOption);
-    // console.log(e.target.value);
     this.setState({
       cycleTitle: e.target.value
     });
@@ -43,21 +43,27 @@ class Dropdown extends Component {
             <DropdownItem
               onClick={this.handleSetCycle}
               value="10 minutes"
-              // cycleTime={10}
+              onMouseDown={e => {
+                e.stopPropagation();
+              }}
             >
               10 minutes
             </DropdownItem>
             <DropdownItem
               onClick={this.handleSetCycle}
               value="30 minutes"
-              // cycleTime={30}
+              onMouseDown={e => {
+                e.stopPropagation();
+              }}
             >
               30 minutes
             </DropdownItem>
             <DropdownItem
               onClick={this.handleSetCycle}
               value="1 hours"
-              // cycleTime={60}
+              onMouseDown={e => {
+                e.stopPropagation();
+              }}
             >
               1 hours
             </DropdownItem>
@@ -65,7 +71,9 @@ class Dropdown extends Component {
             <DropdownItem
               onClick={this.handleSetCycle}
               value="갱신주기 설정"
-              // cycleTime={60}
+              onMouseDown={e => {
+                e.stopPropagation();
+              }}
             >
               set initial
             </DropdownItem>
