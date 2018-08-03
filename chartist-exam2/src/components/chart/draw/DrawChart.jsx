@@ -73,6 +73,7 @@ class DrawChart extends Component {
       baseType,
       dataType
     } = this.props.graphInfo[0];
+    console.log(graphDataList);
     this.setState(
       ChartDataSet(
         graphDataList,

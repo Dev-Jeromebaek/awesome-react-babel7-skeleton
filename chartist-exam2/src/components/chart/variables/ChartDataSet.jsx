@@ -5,7 +5,7 @@ export const ChartDataSet = (
   dataType,
   setCycle
 ) => {
-  // console.log('funccc', graphDataList, graphSubType, baseType, dataType);
+  console.log(graphDataList);
   const names =
     graphSubType === 'PIE_GRAPH'
       ? graphDataList.map(info => {
