@@ -1,7 +1,9 @@
 // Data for Line Chart
+import Chartist from 'react-chartist';
 const optionsLine = {
   // low: 0,
   // high: 800,
+  plugins: [Chartist.plugins.tooltip()],
   showArea: false,
   height: '245px',
   axisX: {

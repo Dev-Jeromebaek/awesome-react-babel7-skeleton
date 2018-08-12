@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChartistGraph from 'react-chartist';
+import Tooltops from 'react-chartist-tooltip';
 
 import {
   optionsLine,
