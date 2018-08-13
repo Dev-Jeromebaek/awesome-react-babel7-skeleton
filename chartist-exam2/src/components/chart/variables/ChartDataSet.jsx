@@ -19,7 +19,7 @@ export const ChartDataSet = (
   const labels =
     graphSubType !== 'PIE_GRAPH'
       ? graphDataList.map(info => {
-          tempArr.push(info.y);
+          tempArr.push({ meta: 'description', value: info.y });
           return info.x.split(' ~ ')[1];
         })
       : graphDataList.map(info => {
