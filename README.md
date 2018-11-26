@@ -53,7 +53,7 @@ npm
 npm install
 
 # serve with hot reload at 0.0.0.0
-npm run start
+npm start
 
 # build for production with minification.
 npm run build
